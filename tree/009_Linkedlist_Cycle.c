@@ -1,0 +1,26 @@
+#include <stdbool.h>
+#include <stddef.h>
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+
+bool hasCycle(struct ListNode *head) {
+    struct ListNode *slow = head;
+    struct ListNode *fast = head;
+    
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;          // Moves 1 step
+        fast = fast->next->next;    // Moves 2 steps
+        
+        if (slow == fast) {
+            return true;            // Cycle detected
+        }
+    }
+    
+    return false;                   // Reached the end, no cycle
+}
